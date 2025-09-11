@@ -1,8 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-dark-bg: #0a0a0f;
+  --color-dark-surface: #1a1a23;
+  --color-dark-card: #252530;
+  --color-dark-border: #3a3a4a;
+  --color-dark-text: #e5e5e7;
+  --color-dark-text-secondary: #a5a5a7;
+  --color-profit-green: #22c55e;
+  --color-loss-red: #ef4444;
+  --color-neutral-blue: #3b82f6;
+  
+  --font-family-mono: "JetBrains Mono", "Courier New", monospace;
+}
 
 /* Custom scrollbar for dark theme */
 ::-webkit-scrollbar {
@@ -10,15 +21,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-dark-surface;
+  background-color: #1a1a23;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-dark-border rounded-full;
+  background-color: #3a3a4a;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-dark-text-secondary;
+  background-color: #a5a5a7;
 }
 
 /* Custom animations */
