@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TrendingUp, RefreshCw, BarChart3, Settings } from 'lucide-react';
 import StockCard from './components/StockCard';
-import StockChart from './components/StockChart';
+import LazyStockChart from './components/LazyStockChart';
 import SearchBar from './components/SearchBar';
+import ConnectionStatus from './components/ConnectionStatus';
+import WebSocketDemo from './components/WebSocketDemo';
 import { useWatchlist, useStockData, useHistoricalData } from './hooks/useStockData';
+import { useWebSocketManager, useRealTimeWatchlist, useHybridStockData } from './hooks/useWebSocket';
+import { preloadStockChart } from './utils/preloader';
 
 function App() {
   const [selectedStock, setSelectedStock] = useState('AAPL');
-  const { watchlist, stocks, loading: watchlistLoading, refetch: refetchWatchlist } = useWatchlist();
-  const { stock: selectedStockData, loading: stockLoading } = useStockData(selectedStock);
+  
+  // Initialize WebSocket connection
+  const wsConnection = useWebSocketManager();
+  
+  // Use hybrid approach: WebSocket for real-time, REST as fallback
+  const { watchlist, stocks, loading: watchlistLoading, isRealTime: watchlistRealTime, refetch: refetchWatchlist } = useRealTimeWatchlist(['AAPL', 'GOOGL', 'MSFT', 'TSLA', 'NVDA']);
+  const { stock: selectedStockData, loading: stockLoading, isRealTime: stockRealTime } = useHybridStockData(selectedStock);
   const { data: chartData, loading: chartLoading } = useHistoricalData(selectedStock);
 
   const handleStockSelect = (symbol) => {
@@ -18,6 +27,11 @@ function App() {
   const handleRefresh = () => {
     refetchWatchlist();
   };
+
+  // Preload heavy components after initial render
+  useEffect(() => {
+    preloadStockChart();
+  }, []);
 
   return (
     <div className="min-h-screen bg-dark-bg dark">
@@ -49,6 +63,8 @@ function App() {
               >
                 <RefreshCw className="w-5 h-5" />
               </button>
+              
+              <ConnectionStatus className="hidden md:flex" />
               
               <button className="p-2 text-dark-text-secondary hover:text-dark-text hover:bg-dark-card rounded-lg transition-all duration-200">
                 <Settings className="w-5 h-5" />
@@ -194,7 +210,7 @@ function App() {
             </div>
 
             {/* Stock Chart */}
-            <StockChart 
+            <LazyStockChart 
               data={chartData} 
               symbol={selectedStock}
               className="animate-fade-in"
@@ -229,6 +245,9 @@ function App() {
                 </div>
               </div>
             </div>
+
+            {/* WebSocket Demo */}
+            <WebSocketDemo />
           </section>
         </div>
       </main>

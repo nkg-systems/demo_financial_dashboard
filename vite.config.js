@@ -11,5 +11,22 @@ export default defineConfig({
   server: {
     host: true,
     port: 5173
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Vendor chunk for React and DOM
+          'react-vendor': ['react', 'react-dom'],
+          // Vendor chunk for UI libraries
+          'ui-vendor': ['lucide-react'],
+          // Vendor chunk for data/networking
+          'data-vendor': ['axios'],
+          // Separate chunk for recharts (large charting library)
+          'charts': ['recharts']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
   }
 })

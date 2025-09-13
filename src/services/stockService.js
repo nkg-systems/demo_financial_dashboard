@@ -70,6 +70,71 @@ const mockStockData = {
     dividend: 0.16,
     high52: 140.76,
     low52: 39.23
+  },
+  'AMZN': {
+    symbol: 'AMZN',
+    name: 'Amazon.com, Inc.',
+    price: 185.45,
+    change: 3.12,
+    changePercent: 1.71,
+    marketCap: '1.94T',
+    volume: '32.4M',
+    pe: 42.3,
+    dividend: 0.00,
+    high52: 201.20,
+    low52: 118.35
+  },
+  'META': {
+    symbol: 'META',
+    name: 'Meta Platforms, Inc.',
+    price: 521.18,
+    change: -2.34,
+    changePercent: -0.45,
+    marketCap: '1.32T',
+    volume: '18.7M',
+    pe: 26.8,
+    dividend: 2.00,
+    high52: 542.81,
+    low52: 279.49
+  },
+  'NFLX': {
+    symbol: 'NFLX',
+    name: 'Netflix, Inc.',
+    price: 682.34,
+    change: 8.45,
+    changePercent: 1.25,
+    marketCap: '294B',
+    volume: '4.2M',
+    pe: 34.5,
+    dividend: 0.00,
+    high52: 725.60,
+    low52: 344.73
+  },
+  'AMD': {
+    symbol: 'AMD',
+    name: 'Advanced Micro Devices, Inc.',
+    price: 144.67,
+    change: -1.23,
+    changePercent: -0.84,
+    marketCap: '234B',
+    volume: '45.8M',
+    pe: 135.2,
+    dividend: 0.00,
+    high52: 227.30,
+    low52: 93.12
+  },
+  'INTC': {
+    symbol: 'INTC',
+    name: 'Intel Corporation',
+    price: 21.78,
+    change: 0.45,
+    changePercent: 2.11,
+    marketCap: '93B',
+    volume: '67.3M',
+    pe: 102.4,
+    dividend: 0.50,
+    high52: 51.28,
+    low52: 18.51
   }
 };
 
